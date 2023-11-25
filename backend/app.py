@@ -75,10 +75,10 @@ def setup():
 def get_books_names():
     try:
         data = request.get_json()
-        book_title = data.get('book_title', '')
+        books_title = data.get('books_title', '')
 
         # Replace this with your actual logic for getting book recommendations
-        matched_books = _get_right_book_name(book_title)
+        matched_books = _get_right_book_name(books_title)
 
         return jsonify({"books_titles": matched_books})
 
@@ -100,7 +100,7 @@ def get_books_reccomandations():
         return jsonify({"error": str(e)}), 500
     
 
-def _get_recommends(target_book_title="", neighbors=6):
+def _get_recommends(target_book_title, neighbors=6):
     global user_rating_pivot, model_knn, combine_book_rating
     recommended_books = {}
 

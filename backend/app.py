@@ -5,7 +5,7 @@ from sklearn.neighbors import NearestNeighbors
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app)
 
 # Define global variables
 user_rating_pivot = None
@@ -68,19 +68,38 @@ def setup():
 
     model_knn = NearestNeighbors(metric = 'cosine', algorithm = 'brute')
     model_knn.fit(user_rating_matrix)
-        
+
+# send back the results to the frontend of full qualified name of the book
+@app.route('/api/get_books_names', methods=['POST'])
+def get_books_names():
+    try:
+        data = request.get_json()
+        book_title = data.get('book_title', '')
+
+        # Replace this with your actual logic for getting book recommendations
+        matched_books = _get_right_book_name(book_title)
+
+        return jsonify({"books_titles": matched_books})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500 
+    
+    
 @app.route('/api/get_books_reccomandations', methods=['POST'])
 def get_books_reccomandations():
-    data = request.get_json()
-    book_title = data.get('book_title', '')
-    return jsonify(get_recommends(book_title))
+    try:
+        data = request.get_json()
+        book_title = data.get('book_title_precise', '')
 
-# @app.route('/api/get_books_reccomandations', methods=['POST'])
-# def get_books_reccomandations():
-#     data = request.get_json()
-#     book_title = data.get('book_title', '')
+        # Replace this with your actual logic for getting book recommendations
+        recommendations = _get_recommends(book_title)
 
-def get_recommends(target_book_title="", neighbors=6):
+        return jsonify({"books": recommendations})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+
+def _get_recommends(target_book_title="", neighbors=6):
     global user_rating_pivot, model_knn, combine_book_rating
     recommended_books = {}
 
@@ -118,4 +137,5 @@ def _get_right_book_name(book_title):
 if __name__ == '__main__':
     setup()
     app.run(debug=True)
+    
 

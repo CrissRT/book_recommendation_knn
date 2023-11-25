@@ -7,12 +7,23 @@ function App() {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/get_books_recommendations', { book_title: bookTitle });
+      const response = await axios.post('http://127.0.0.1:5000/api/get_books_recommendations', { book_title_precise: bookTitle });
+      console.log(response.data)
       setBooks(response.data.books);
     } catch (error) {
-      console.error('Error fetching book info:', error);
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        console.error('Error from server:', error.response.data);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error('No response received from the server');
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error('Error setting up the request:', error.message);
+      }
     }
   };
+  
 
   return (
     <div>

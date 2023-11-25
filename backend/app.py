@@ -13,6 +13,7 @@ model_knn = None
 rating_with_totalRatingCount = None
 combine_book_rating = None
 
+
 def setup():
     global user_rating_pivot, model_knn, rating_with_totalRatingCount, combine_book_rating
     books_filename = '../data/BX-Books.csv'
@@ -94,7 +95,7 @@ def get_books_reccomandations():
         # Replace this with your actual logic for getting book recommendations
         recommendations = _get_recommends(book_title)
 
-        return jsonify({"books": recommendations})
+        return jsonify({"books_returned": recommendations})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
@@ -122,15 +123,12 @@ def _get_right_book_name(book_title):
     pattern = book_title
 
     # Use str.contains() to search for the pattern in the specified column
-    result = rating_with_totalRatingCount['title'].str.contains(pattern, case=False)
+    mask = rating_with_totalRatingCount['title'].str.contains(pattern, case=False)
 
-    # Extract indexes where the value is True
-    true_indexes = result[result].index
-    match_books = set()
-    # Display the DataFrame rows that match the pattern
-    for index in true_indexes:
-        match_books.add(rating_with_totalRatingCount['title'][index])
-    return list(match_books)[:10]
+    # Extract indexes where the value is True and get the titles directly
+    match_books = set(rating_with_totalRatingCount.loc[mask, 'title'].tolist())
+
+    return list(match_books)[:5]
 
 
 

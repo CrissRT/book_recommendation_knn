@@ -4,6 +4,7 @@ from scipy.sparse import csr_matrix
 from sklearn.neighbors import NearestNeighbors
 from flask_cors import CORS
 
+
 app = Flask(__name__)
 CORS(app)
 
@@ -70,36 +71,6 @@ def setup():
     model_knn = NearestNeighbors(metric = 'cosine', algorithm = 'brute')
     model_knn.fit(user_rating_matrix)
 
-# send back the results to the frontend of full qualified name of the book
-@app.route('/api/get_books_names', methods=['POST'])
-def get_books_names():
-    try:
-        data = request.get_json()
-        books_title = data.get('books_title', '')
-
-        # Replace this with your actual logic for getting book recommendations
-        matched_books = _get_right_book_name(books_title)
-
-        return jsonify({"books_titles": matched_books})
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500 
-    
-    
-@app.route('/api/get_books_reccomandations', methods=['POST'])
-def get_books_reccomandations():
-    try:
-        data = request.get_json()
-        book_title = data.get('book_title_precise', '')
-
-        # Replace this with your actual logic for getting book recommendations
-        recommendations = _get_recommends(book_title)
-
-        return jsonify({"books_returned": recommendations})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-    
-
 def _get_recommends(target_book_title, neighbors=6):
     global user_rating_pivot, model_knn, combine_book_rating
     recommended_books = {}
@@ -118,6 +89,10 @@ def _get_recommends(target_book_title, neighbors=6):
         
 
 def _get_right_book_name(book_title):
+    flag = None
+    if book_title == "":
+        flag = 1
+        book_title = "random book title"
     # Define the pattern you want to search for
     global rating_with_totalRatingCount
     pattern = book_title
@@ -126,11 +101,43 @@ def _get_right_book_name(book_title):
     mask = rating_with_totalRatingCount['title'].str.contains(pattern, case=False)
 
     # Extract indexes where the value is True and get the titles directly
-    match_books = set(rating_with_totalRatingCount.loc[mask, 'title'].tolist())
+    match_books = rating_with_totalRatingCount.loc[mask, 'title'].unique()[:5]
 
-    return list(match_books)[:5]
+    if flag == 1:
+        return []
+    return list(match_books)
 
 
+# send back the results to the frontend of full qualified name of the book
+@app.route('/api/get_books_names', methods=['POST'])
+def get_books_names():
+    try:
+        data = request.get_json()
+        book_title = data.get('book_title', '')
+        book_title = book_title.strip()
+
+        # Replace this with your actual logic for getting book recommendations
+        matched_books = _get_right_book_name(book_title)
+
+        return jsonify({"books_titles": matched_books})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500 
+    
+    
+@app.route('/api/get_books_reccomandations', methods=['POST'])
+def get_books_reccomandations():
+    try:
+        data = request.get_json()
+        book_title = data.get('book_title_precise', '')
+        book_title = book_title.strip()
+
+        # Replace this with your actual logic for getting book recommendations
+        recommendations = _get_recommends(book_title)
+
+        return jsonify({"books_recomendded": recommendations})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     setup()

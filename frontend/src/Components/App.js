@@ -80,7 +80,7 @@ function App() {
   return (
     <>
       {/* <img src={logo} id='logo' /> */}
-      <h1>Book Search</h1>
+      <h1>Book Recommendation</h1>
       <div id='search-bar-div'>
         <div class="custom-input text-color-black" style={myStyle}>
           <i className="bi bi-book"></i>

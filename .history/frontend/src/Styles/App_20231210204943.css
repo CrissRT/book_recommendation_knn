@@ -1,0 +1,24 @@
+:root {
+  --background-color: #0b1148;
+  --outside-block-text-color: white;
+  --inside-block-text-color: black;
+}
+
+.text-color-black {
+  color: var(--inside-block-text-color);
+}
+
+h1 {
+  margin: 100px 10px 50px 0;
+}
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+button {
+  color: var(--inside-block-text-color);
+}

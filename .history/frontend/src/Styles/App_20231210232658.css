@@ -1,0 +1,124 @@
+:root {
+  /* --background-color: #0b1148;
+  --outside-block-text-color: white;
+  --inside-block-text-color: black; */
+  --background-color: white;
+  --outside-block-text-color: black;
+  --inside-block-text-color: black;
+}
+
+.text-color-black {
+  color: var(--inside-block-text-color);
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+body > #root > * {
+  margin : 0 0 50px 0;
+} 
+
+#logo {
+  width: 50px;
+}
+
+h1 {
+  margin: 0 0 50px 0;
+}
+
+#search-bar-div{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  flex-direction: column;
+  align-items:center;
+}
+
+.custom-input {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin : 0;
+  width: 80%;
+  max-width: 1000px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; */
+}
+
+.custom-input input {
+  margin-left: 100px;
+  width: 100%;
+  border: none;
+}
+
+.custom-input input:focus  {
+  outline: none;
+}
+
+.custom-input:focus {
+  outline: none;
+  border-color: #66afe9;
+  box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
+}
+
+#suggestion-bar-div {
+  position: absolute;
+  width: 80%;
+  max-width: 1000px;
+  top:100%;
+  background-color:white;
+  border: 1px solid var(--outside-block-text-color);
+  border-radius: 10px;
+  padding: 10px 15px 10px 32px;
+  cursor: pointer;
+}
+
+.suggestions {
+  width: 100%;
+}
+
+.search-button {
+  /* background: linear-gradient(to right, var(--outside-block-text-color), var(--background-color)); */
+  color: var(--inside-block-text-color);
+  border: 1px solid var(--outside-block-text-color);
+  border-radius: 10px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, border 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.search-button:hover {
+  background: linear-gradient( var(--background-color), var(--outside-block-text-color));
+  border: 1px solid var(--background-color);
+  color: var(--background-color);
+}
+
+/* Footer styles */
+footer {
+  margin-top: auto; /* Push the footer to the bottom */
+  background-color: var(--background-color);
+  color: var(--inside-block-text-color);
+  padding: 20px;
+  text-align: center;
+}
+
+footer a {
+  color: var(--inside-block-text-color);
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s ease-in-out;
+}
+
+footer a:hover {
+  color: var(--outside-block-text-color);
+}

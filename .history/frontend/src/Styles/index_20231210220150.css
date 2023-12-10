@@ -1,0 +1,27 @@
+:root {
+  /* --background-color: #0b1148;
+  --outside-block-text-color: white;
+  --inside-block-text-color: black; */
+  --background-color: white;
+  --outside-block-text-color: black;
+  --inside-block-text-color: black;
+}
+
+html {
+  /* height: 100%; */
+}
+
+body {
+  margin: 100px 0 0 0;
+  /* margin: 0; */
+  padding: 0;
+  min-height: 100%;
+  background-color: var(--background-color);
+  width: 100%;
+  /* height: auto; */
+}
+
+body *{
+  color: var(--outside-block-text-color);
+  font-family: 'Libre Baskerville', serif;
+}

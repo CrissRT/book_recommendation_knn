@@ -1,0 +1,19 @@
+:root {
+  --background-color: #0b1148;
+  --outside-block-color: #2ecc71;
+  --accent-color: #e74c3c;
+}
+
+body {
+  margin: 0;
+  background-color: #0b1148;
+}
+
+body *{
+  color: white;
+  font-family: 'Libre Baskerville', serif;
+}
+
+.text-color {
+  color: #0b1148;
+}

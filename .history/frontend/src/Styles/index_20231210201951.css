@@ -1,0 +1,23 @@
+:root {
+  --background-color: #0b1148;
+  --outside-block-text-color: white;
+  --inside-block-text-color: black;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+}
+
+body *{
+  color: var(--outside-block-text-color);
+  font-family: 'Libre Baskerville', serif;
+}
+
+.text-color {
+  color: var(--inside-block-text-color);
+}
+
+.root {
+  
+}

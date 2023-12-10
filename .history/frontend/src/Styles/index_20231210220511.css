@@ -1,0 +1,46 @@
+:root {
+  /* --background-color: #0b1148;
+  --outside-block-text-color: white;
+  --inside-block-text-color: black; */
+  --background-color: white;
+  --outside-block-text-color: black;
+  --inside-block-text-color: black;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 100px 0 0 0;
+  min-height: 100%;
+  background-color: var(--background-color);
+  width: 100%;
+}
+
+body *{
+  color: var(--outside-block-text-color);
+  font-family: 'Libre Baskerville', serif;
+}
+
+
+/*  */
+footer {
+  background-color: var(--background-color);
+  color: var(--inside-block-text-color);
+  padding: 20px;
+  text-align: center;
+}
+
+/* Style for the footer links, adjust as needed */
+footer a {
+  color: var(--inside-block-text-color);
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s ease-in-out;
+}
+
+footer a:hover {
+  color: var(--outside-block-text-color);
+}

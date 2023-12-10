@@ -1,0 +1,11 @@
+.text-color {
+  color: var(--inside-block-text-color);
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  background-color: #0b1148;
+}
+
+body *{
+  font-family: 'Libre Baskerville', serif;
+}
+
